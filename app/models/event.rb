@@ -1,9 +1,9 @@
 class Event < ApplicationRecord
-  validates :start_date, :duration, :title, :location, presence: true
+  validates :start_date, :duration, :title, :location, :description, :price, presence: true
   validates :title, length: { in: 5..140 }
   validates :description, length: { in: 20..1000 }
   validates :price, numericality: { only_integer: true, greater_than: 0 }
-  validate :start_after_now, :validate_duration on: :create
+  validate :start_after_now, :validate_duration, on: :create
 
   has_many :attendances
   has_many :users, through: :attendances

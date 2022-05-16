@@ -5,8 +5,9 @@ class Event < ApplicationRecord
   validates :price, numericality: { only_integer: true, greater_than: 0 }
   validate :start_after_now, :validate_duration, on: :create
 
+  belongs_to :admin, class_name: "User"
   has_many :attendances
-  has_many :users, through: :attendances
+  has_many :attendees, class_name: "User", through: :attendances
 
   def start_after_now
     if start_date.present? && start_date < Date.today

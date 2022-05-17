@@ -1,31 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
-
-
-<%= link_to 'Modifier mon profil', edit_user_path(@user) %>
-<%= link_to 'Modifier adresse et mot de passe', edit_user_registration_path %>
-<%= link_to 'Retour à l\'acceuil', root_path %>
-
-
 <section class="vh-100" style="background-color: #9de2ff;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -34,7 +8,7 @@
           <div class="card-body p-4">
             <div class="d-flex text-black">
               <div class="flex-shrink-0">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                <img src="https://source.unsplash.com/350x350/?portrait?sig=<%=rand(1..50)%>"
                   alt="Generic placeholder image" class="img-fluid"
                   style="width: 180px; border-radius: 10px;">
               </div>
@@ -68,5 +42,15 @@
     </div>
   </div>
 
-  <%= render partial: "events/list_events", locals: {events: @events}%>
+
+<h1>Evenements crées par <%=@user.first_name%> :</h1>
+<%= render partial: "events/list_events", locals: {events: @events_admin}%>
+
+<h1>Evenements auquels participte <%=@user.first_name%> :</h1>
+<%= render partial: "events/list_events", locals: {events: @events_attend}%>
+
+
+<%= link_to 'Modifier mon profil', edit_user_path(@user) %>
+<%= link_to 'Modifier adresse et mot de passe', edit_user_registration_path %>
+<%= link_to 'Retour à l\'acceuil', root_path %>
 </section>

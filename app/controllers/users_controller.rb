@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authenticate_user, only: [:show, :update]
 
   # # GET /users or /users.json
   # def index
@@ -8,7 +9,12 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @events = @user.admin_events
+    if @user == current_user
+      @events_admin = @user.admin_events
+      @events_atend = @user.attend_events
+    else
+      redirect_to root_path
+    end 
   end
 
   # # GET /users/new
@@ -67,5 +73,12 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:email, :encrypted_password, :description, :first_name, :last_name)
+    end
+
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Please log in."
+        redirect_to new_user_registration_path 
+      end
     end
 end

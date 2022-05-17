@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :authenticate_user, only: [:new, :edit, :update, :create, :destroy]
 
   # GET /events or /events.json
   def index
@@ -66,5 +67,12 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location).merge(admin: current_user)
+    end
+
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Please log in."
+        redirect_to new_user_registration_path 
+      end
     end
 end

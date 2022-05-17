@@ -11,7 +11,12 @@ class UsersController < ApplicationController
   def show
     if @user == current_user
       @events_admin = @user.admin_events
-      @events_atend = @user.attend_events
+      @events_attend = @user.attend_events
+      puts "#" * 60
+      puts @events_admin
+      puts @events_attend
+      puts @events_admin.class
+      puts "#" * 60
     else
       redirect_to root_path
     end 
@@ -43,14 +48,18 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if current_user == @user
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_path
     end
   end
 

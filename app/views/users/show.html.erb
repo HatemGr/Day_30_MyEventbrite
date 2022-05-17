@@ -25,10 +25,7 @@
                     <p class="small text-muted mb-1">Participe à</p>
                     <p class="mb-0"><%=pluralize(@user.attend_events.count, "event")%></p>
                   </div>
-                  <div>
-                    <p class="small text-muted mb-1">Rating</p>
-                    <p class="mb-0">8.5</p>
-                  </div>
+
                 </div>
                 <div class="d-flex pt-1">
                   <button type="button" class="btn btn-outline-primary me-1 flex-grow-1"><%=@user.email%></button>
@@ -45,9 +42,6 @@
 
 <h1>Evenements crées par <%=@user.first_name%> :</h1>
 <%= render partial: "events/list_events", locals: {events: @events_admin}%>
-
-<h1>Evenements auquels participte <%=@user.first_name%> :</h1>
-<%= render partial: "events/list_events", locals: {events: @events_attend}%>
 
 
 <%= link_to 'Modifier mon profil', edit_user_path(@user) %>

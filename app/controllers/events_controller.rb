@@ -26,6 +26,7 @@ class EventsController < ApplicationController
     
     respond_to do |format|
       if @event.save
+        Attendance.create(event: @event, attendee: current_user)
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
@@ -37,24 +38,32 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+    if current_user == @event.admin
+      respond_to do |format|
+        if @event.update(event_params)
+          format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
+          format.json { render :show, status: :ok, location: @event }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_path
     end
   end
 
   # DELETE /events/1 or /events/1.json
   def destroy
-    @event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
-      format.json { head :no_content }
+    puts "#" * 50
+    if current_user == @event.admin
+      @event.destroy
+      respond_to do |format|
+        format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_path
     end
   end
 

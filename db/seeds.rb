@@ -12,7 +12,7 @@ User.destroy_all
 
 ### Generate 5 users
 ["",1,2,3,4,5].each do |i|
-  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: "Cet utilisateur a la description suivante: Generated description ##{Faker::Number.number(digits: 5)}", email: "thptest#{i}@yopmail.com")
+  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: "Cet utilisateur a la description suivante: Generated description ##{Faker::Number.number(digits: 5)}", email: "thptest#{i}@yopmail.com",password: Faker::Lorem.characters(number: rand(7..12)))
 end
 
 ### Generate 5 events

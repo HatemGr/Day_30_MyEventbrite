@@ -1,21 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Encrypted password:</strong>
-  <%= @user.encrypted_password %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
-
-<p>
   <strong>First name:</strong>
   <%= @user.first_name %>
 </p>
@@ -25,5 +10,17 @@
   <%= @user.last_name %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @user.description %>
+</p>
+
+
+<%= link_to 'Modifier mon profil', edit_user_path(@user) %>
+<%= link_to 'Modifier adresse et mot de passe', edit_user_registration_path %>
+<%= link_to 'Retour à l\'acceuil', root_path %>

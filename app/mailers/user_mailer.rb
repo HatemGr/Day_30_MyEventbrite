@@ -15,9 +15,7 @@ class UserMailer < ApplicationMailer
   end
 
   def admin_attend_email(attendance)
-    puts "###########"    
-    puts attendance.event.admin.first_name
-    puts "###########"   
+  
     @admin = attendance.event.admin
     @attendee = attendance.attendee
     @event = attendance.event

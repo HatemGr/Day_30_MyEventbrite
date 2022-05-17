@@ -12,21 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :encrypted_password %>
-    <%= form.text_field :encrypted_password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
   </div>
@@ -36,7 +21,23 @@
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
   </div>
+
+  <%# <div class="field">
+    <%= form.label :encrypted_password %>
+    <%# <%= form.text_field :encrypted_password %>
+  <%# </div> %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Mettre à jour' %>
+  </div>
+
 <% end %>

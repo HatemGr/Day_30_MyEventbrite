@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/index'
   devise_for :users
+  resources :users
   
   resources :events do 
     resources :attendances

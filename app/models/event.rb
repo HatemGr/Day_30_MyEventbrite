@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   validates :start_date, :duration, :title, :location, :description, :price, presence: true
   validates :title, length: { in: 5..140 }
   validates :description, length: { in: 20..1000 }
-  validates :price, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :start_after_now, :validate_duration, on: :create
 
   belongs_to :admin, class_name: "User"
@@ -23,6 +23,10 @@ class Event < ApplicationRecord
 
   def end_date
     self.start_date + (self.duration * 60)
+  end
+
+  def is_free?
+    return self.price == 0
   end
 
 end

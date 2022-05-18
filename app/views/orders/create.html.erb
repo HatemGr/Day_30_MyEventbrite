@@ -1,4 +1,4 @@
-<h2>Tu as payé la somme de  <strong><%= @stripe_amount  %> €</strong>!</h2>
+<h2>Tu as payé la somme de  <strong><%= @stripe_amount.to_i / 100%> €</strong>!</h2>
 
 <h4> Redirection vers la page d'acceuil dans les prochaines secondes </h4>
 

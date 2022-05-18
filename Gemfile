@@ -71,3 +71,4 @@ gem "font-awesome-rails"
 gem 'mailjet', :git => 'https://github.com/mailjet/mailjet-gem.git'
 gem 'dotenv-rails'
 gem 'devise'
+gem 'stripe'

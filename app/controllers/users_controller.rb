@@ -12,11 +12,6 @@ class UsersController < ApplicationController
     if @user == current_user
       @events_admin = @user.admin_events
       @events_attend = @user.attend_events
-      puts "#" * 60
-      puts @events_admin
-      puts @events_attend
-      puts @events_admin.class
-      puts "#" * 60
     else
       redirect_to root_path
     end 

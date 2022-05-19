@@ -74,3 +74,4 @@ gem 'devise'
 gem 'stripe'
 gem "animate-rails"
 gem "animate.css-rails"
+gem "aws-sdk-s3", require: false
